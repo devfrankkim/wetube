@@ -1,0 +1,24 @@
+extends layouts/main.pug
+include mixins/videoBlock
+
+
+//- EXTENTION 'import from /layouts/main.pug'
+//- and then overwrite the block content
+block content
+    .videos
+        each db in videos 
+            +videoBlock({
+                title: db.title,
+                views: db.views,
+                videoFile: db.videoFile
+            })
+
+//- The key-value is going to videoBlock.pug. 
+//- The elment videoBlock.pug is looking for
+//- home.pug => trasport to => videoBlock.pug
+//- videoBlock.pug is going to execute his function.
+//- different information, same structure => mixin 
+//- ex) video sumnail, video description, video location
+    
+
+

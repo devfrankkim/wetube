@@ -1,0 +1,14 @@
+extends layouts/main.pug
+
+block content
+    .form-container
+        form(action=routes.join, method='post')
+            input(type="text", name="name", placeholder="Full Name")
+            input(type="email", name="email", placeholder="Email")  
+            input(type="password", name="password", placeholder="Password")  
+            input(type="password", name="password2", placeholder="Verify Password")  
+            input(type="submit", value="Join Now")
+        include partials/socialLogin.pug
+
+//- POST /login에 대한 컨트롤러가 필요하다.
+//- form container에 추구한다. include partials/socialLogin

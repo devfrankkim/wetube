@@ -1,0 +1,21 @@
+mixin videoBlock(video = { })
+  .videoBlock   
+    video.videoBlock__thumbnail(src= video.videoFile, controls="true")
+    h4.videoBlock__title=video.title
+    h6.videoBlock__views=video.views 
+
+
+//- 가장 위에는 video tag가 들어간다. ex) article tag, body tag, video tag
+//- src를 추가할 지 에디터가 물어본다. video tag는 이미지 태그와 비슷하다. 
+//- src=video.videoFile
+
+//- mixin is kind of a function in pug
+//- mixin에는 인자가 하나 필요하다. 
+//- argument 이름을 video, default {}, 기본적으로 빈 객체. 
+//- https://pug-mixins.readthedocs.io/en/latest/user_guide/modules/video/youtube.html
+
+//- Partial is just an HTML block that you re-use.
+//- Mixin is an HTML code that you re-use with dynamic data.
+
+//- includes adds a piece of .pug to a template.
+//- extends makes the template inherit from a father and become the father to add more context.
