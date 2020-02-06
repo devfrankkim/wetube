@@ -3,6 +3,10 @@ import routes from "./routes";
 export const localMiddleware = (req, res, next) => {
   res.locals.siteName = "Records Tube";
   res.locals.routes = routes;
+  res.locals.user = {
+    isAutenticated: true,
+    id: 1
+  };
   next(); // next() => req or handler 전달.
 };
 

@@ -9,11 +9,25 @@ header.header
 
     .header__column
         ul
-            li  
-                a(href=routes.login) Log in
-            li
-                a(href=routes.join) Join
+            if !user.isAutenticated
+                li  
+                    a(href=routes.join) Join
+                li
+                    a(href=routes.login) Log in
+            else
+                li
+                    a(href=`/videos${routes.upload}`) Upload
+                li
+                    a(href=routes.userDetail(user.id)) Profile
+                li
+                    a(href=routes.logout) Log out
+
 
 
 //- log out header 추가.
 //- 만약 로그아웃 된 상태라면, Join, Login이 보여아 한다.
+
+//- if I am logged-in => 이 변수는 나중에 추가로 전달해준다. 
+//- else => 다른 링크를 보여준다.
+
+//- *** you can't execute without the arguments.

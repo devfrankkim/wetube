@@ -8,6 +8,7 @@ block content
     .videos
         each db in videos 
             +videoBlock({
+                id: db.id,
                 title: db.title,
                 views: db.views,
                 videoFile: db.videoFile

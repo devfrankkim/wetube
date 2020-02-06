@@ -132,11 +132,41 @@ export const home = (req, res) => res.render("home", {pageTitle : "HOMEControlel
 
 
 
+monggo db는 C++로 만들어져서 javaScript와 연결 시키려면 adapter가 필요하다.
+ 
+javaScript 코드로 작성하고 싶으면 Mongo DB로 부터 instruction을 받아야 한다.
+mongoose => elegant mongodvb object modeling for node.js
+
+**** npm install mongoose
+
+Monggo DB is DataBase
+Mongoose connects to DataBase
+
+MongoDB is NoSQL DataBase
+
+MongoDB is good for chatting DB because it's flexible and fast
+
+// 우리가 요청하는건 string으로 된 DataBase다. 어디에 Database가 저장되어 있는지 알려준다.
+
+***** npm install dotenv
+
+dotenv륾 설치한 이유는, 어떤 부분을 숨기고 싶을 때.
+ex)to Protect user's data(password, id) from other people.
+
+
+*** mongod should be running. and then you can access "mongo" 
+
+MongoDB is json.file
+
+
 # \*
 
 # \*
 
 ---
+
+
+
 
 -----------------------node 시작-----------------------
 npm은 인터넷에서 다운받은 후 설치
@@ -287,7 +317,7 @@ https://mongoosejs.com/ 는 몽고db를 js에서 사용할 수 있게 해주는 
 
 npm install mongooes 몽고DB를 NodeJS에서 사용하기 위해 install
 
-use hyeok-tube (내 데이터베이스 이름 | 본인이 확인하고 싶은 데이터베이스 명을 use + 입력해야한다.)
+use wetube (내 데이터베이스 이름 | 본인이 확인하고 싶은 데이터베이스 명을 use + 입력해야한다.)
 
 -----------------------MongoDB 끝-----------------------
 -----------------------dotenv 시작-----------------------
