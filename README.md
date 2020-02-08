@@ -196,6 +196,12 @@ absolute paths provide the complete website address where you want the user to g
 
 EXPRESS DOESN'T NEED 'ID'. EXPRESS needs THE 'PARAMETER'
 
+
+https://mongoosejs.com/docs/api
+활용하면서 찾는다.
+
+
+
 # \*
 
 # \*

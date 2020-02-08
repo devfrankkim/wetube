@@ -53,7 +53,7 @@ export const videosDetailController = async (req, res) => {
     const video = await VideoModel.findById(id);
     console.log(video);
     res.render("videoDetail.pug", {
-      pageTitle: "VideosDetail!!",
+      pageTitle: video.title,
       video: video
     });
   } catch (error) {
@@ -80,11 +80,13 @@ export const postVideosEditController = async (req, res) => {
     body: { title, description }
   } = req;
   try {
-    await VideoModel.findOneAndUpdate({
-      _id: id,
-      title: title,
-      description: description
-    });
+    await VideoModel.findOneAndUpdate(
+      { _id: id },
+      {
+        title: title,
+        description: description
+      }
+    );
     res.redirect(routes.videoDetail(id));
   } catch (error) {
     res.redirect(routes.home);
@@ -92,10 +94,21 @@ export const postVideosEditController = async (req, res) => {
 };
 
 // Delete Videos
-export const videosDeleteController = (req, res) =>
-  res.render("deleteVideo.pug", { pageTitle: "DeleteVideos" });
+export const videosDeleteController = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    await VideoModel.findOneAndDelete({ _id: id });
+    // const videos = await VideoModel.findById(id);
+  } catch (error) {
+    console.log(error);
+  }
+  res.redirect(routes.home);
+};
 
 /*
+
 
 res.render하게 되면, 
 {pageTitle : " "} => "home" template 으로 전달됨.
