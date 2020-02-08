@@ -16,9 +16,11 @@ const path = require("path"); // to change the view path
 // const FUNCTION = () => {};
 
 // app.set("views", path.join(__dirname, "/viewspug")); 'to change the view path'
+app.use(helmet()); // security
 app.set("view engine", "pug");
 
-app.use(helmet()); // security
+app.use("/uploads", express.static("uploads"));
+// when somebody goes to /uploads, it goes to uploads directory.
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,3 +50,5 @@ app.get is to only answer to'GET requests' to a certain routes.
 Simply app.use means “Run this on ALL requests”
 app.get means “Run this on a GET request, for the given URL”
 */
+
+// file을 upload하고 URL을 반환할 middleware가 필요하다. => multar

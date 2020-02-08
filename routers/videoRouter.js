@@ -1,25 +1,33 @@
 import express from "express";
 import routes from "../routes";
 import {
-  videoHomeControllerGlobal,
   videosDetailController,
-  videosEditController,
-  videosDeleteController,
   getVideosUploadController,
-  postVideosUploadController
+  postVideosUploadController,
+  getVideosEditController,
+  postVideosEditController
 } from "../ControllersGlobal/videoController";
+import { middlewareUploadVideo } from "../middleware";
 
 const videoRouter = express.Router(); // it is not export default => { useRouter }
 
 // videoRouter.get(routes.videos, videoHomeControllerGlobal);
 videoRouter.get(routes.upload, getVideosUploadController);
-videoRouter.post(routes.upload, postVideosUploadController);
+videoRouter.post(
+  routes.upload,
+  middlewareUploadVideo,
+  postVideosUploadController
+);
+
+// console.log(routes.editVideo);
+// console.log(routes.editVideo());
 
 videoRouter.get(routes.videoDetail(), videosDetailController);
-// the route is a function so you neex to execute it.
-videoRouter.get(routes.editVideo, videosEditController);
-videoRouter.get(routes.deleteVideo, videosDeleteController);
+videoRouter.get(routes.editVideo(), getVideosEditController);
+videoRouter.post(routes.editVideo(), postVideosEditController);
+videoRouter.get(routes.deleteVideo, postVideosEditController);
 
 export default videoRouter;
 
+// The route is a function so you need to execute it.
 // "export default"  exports the file as it is

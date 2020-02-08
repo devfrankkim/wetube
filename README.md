@@ -157,7 +157,44 @@ ex)to Protect user's data(password, id) from other people.
 *** mongod should be running. and then you can access "mongo" 
 
 MongoDB is json.file
+.env 안에 ';' 들어가면 => can't read database 
 
+file을 upload하고 URL을 반환할 middleware가 필요하다. => multar
+
+***npm install multer***
+enctype="multipart/form-data"
+그리고 UPLOAD Form의 enctype에 multipart/form-data를 추가해야 한다.
+
+file을 보낼 때, form의 encoding이 달라야 한다.
+
+Multer is a node. js middleware for handling multipart/form-data , which is primarily used for uploading files.
+
+Multer will not process any form which is not multipart 
+
+TERMINAL
+
+To remove data
+
+1. mongo
+2. use <database_name>
+3. show collections <show collections in current database>
+   => videos
+    *collections is like model
+4. db.videos.remove({}) => "WriteResult({ "nRemoved" : 1 })"
+5. app.use("/uploads", express.static());
+     express.static() is a built-in middleware.
+        middleware for sending files from directory .
+
+
+gitignore, uploads숨김.     
+
+https://www.coffeecup.com/help/articles/absolute-vs-relative-pathslinks/
+
+You must use absolute paths when linking to another Website, but you can also use absolute paths within your own website. 
+
+absolute paths provide the complete website address where you want the user to go.
+
+EXPRESS DOESN'T NEED 'ID'. EXPRESS needs THE 'PARAMETER'
 
 # \*
 
