@@ -1,12 +1,12 @@
-import routes from "../routes.js";
-import VideoModel from "../models/Video.js";
+import routes from "../routes";
+import VideoModel from "../models/Video";
 
 // Home
 export const videoHomeControllerGlobal = async (req, res) => {
   try {
-    const videos = await VideoModel.find({});
+    const videos = await VideoModel.find({}).sort({ _id: -1 });
     // console.log(videos);
-    res.render("home.pug", { pageTitle: "Home", videos: videos });
+    res.render("home.pug", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
     res.render("home", { pageTitle: "Home", videos: [] });
@@ -14,14 +14,22 @@ export const videoHomeControllerGlobal = async (req, res) => {
 };
 
 // Search Videos
-export const searchControllerGlobal = (req, res) => {
+export const searchControllerGlobal = async (req, res) => {
   const {
     query: { term: searchingBy }
   } = req;
+  let videos = [];
+  try {
+    videos = await VideoModel.find({
+      title: { $regex: searchingBy, $options: "i" }
+    });
+  } catch (error) {
+    console.log(error);
+  }
   res.render("search.pug", {
     pageTitle: "Search",
-    searchingBy: searchingBy,
-    videos: videos
+    searchingBy,
+    videos
   });
 };
 
@@ -36,8 +44,8 @@ export const postVideosUploadController = async (req, res) => {
   } = req;
   const newVideo = await VideoModel.create({
     fileUrl: path,
-    title: title,
-    description: description
+    title,
+    description
   });
 
   // console.log(newVideo);
@@ -54,7 +62,7 @@ export const videosDetailController = async (req, res) => {
     console.log(video);
     res.render("videoDetail.pug", {
       pageTitle: video.title,
-      video: video
+      video
     });
   } catch (error) {
     res.redirect(routes.home);
@@ -83,8 +91,8 @@ export const postVideosEditController = async (req, res) => {
     await VideoModel.findOneAndUpdate(
       { _id: id },
       {
-        title: title,
-        description: description
+        title,
+        description
       }
     );
     res.redirect(routes.videoDetail(id));
@@ -149,7 +157,7 @@ video가 아닌 다른 file이 UPLOAD되는 것을 막는다.
 /*
 routes.js
 => const VIDEOS_DETAIL = "/:id";
-console.log(req.params) id 값을 불러오고, 변수명도 바꿀 수 있다. 
+console.log(req.params) 'id'값을 불러오고, 변수명도 바꿀 수 있다. 
 this is the only way to get information from URL;
 
 

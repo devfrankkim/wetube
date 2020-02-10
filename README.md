@@ -201,6 +201,58 @@ https://mongoosejs.com/docs/api
 활용하면서 찾는다.
 
 
+sort({_id: -1}) => 순서를 앞뒤로 바꾼다. sort by id
+
+*** ESlint ***
+CODE STRUCTURE위해서 install 한다.
+
+ npm install eslint 
+
+ npm은 package를 설치한다. => node_modules 
+ sometimes you just want to use the package everywhere.
+ if you install npm globally, you can use it in other projects.
+     
+    "npm install eslint -g"
+    When you are done installing eslint =>
+     "eslint --init"
+     "npm install eslint-config-prettier"
+
+    => 추가를 해야한다. (.eslintrc.js)
+      extends: ["airbnb-base", "plugin:prettier/recommended"],
+
+    => npm install eslint -D (install locally)
+    => npm install prettier -D
+    => npm install --save-dev eslint-plugin-prettier
+    => npm install --save-dev eslint-config-prettier
+    => npm install --save-D eslint-plugin-import
+
+Regular expression은 string으로 부터 무언가를 가지고 온다.
+https://regex101.com
+
+https://docs.mongodb.com/manual/reference/operator/query/
+
+***SEARCH***
+
+find title by using regular expression
+ex)
+$regex: searchingBy
+$options: "i" => "i" means insensitive
+
+설명과 제목을 동시에 검색
+https://docs.mongodb.com/manual/reference/operator/query/or/ 
+
+    videos = await Video.find({
+      $or: [
+        { title: { $regex: searchingBy, $options: "i" } },
+        { description: { $regex: searchingBy, $options: "i" } }
+      ]
+    });
+
+middlewares.js 파일에 있는, multerVideo.single("videosFile") 
+*upload.pug에 있는 name 동일 해야함!!
+
+    input(type="file", id="file", name="videoFile", required=true, accept="video/*")
+
 
 # \*
 
