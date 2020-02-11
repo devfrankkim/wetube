@@ -253,6 +253,120 @@ middlewares.js 파일에 있는, multerVideo.single("videosFile")
 
     input(type="file", id="file", name="videoFile", required=true, accept="video/*")
 
+WEBPACK is module bundler
+
+많은 파일들을 가져와서, webpack에게 주면, webpack은 static 파일로 변환해준다.(브라우저가 알아들을 수 있드록 해준다.)
+file => webpack => file (compatible files) for browser.
+
+***npm install webpack webpack-cli***
+***webpack.config.js 파일 생성***  
+***
+package.json => "scripts" => "start" => "dev:server"변경 
+"dev:assets":"" 추가
+npm start 대신 npm run dev:server , npm run dev:assets로, 각자 다른 콘솔에서 실행시켜야한다.
+when somebody inserts dev:assets, it calls " webpack " => "dev:assets" : "webpack"
+webpack will automatically find "webpack.config.js" 
+
+rule: webpack은 exported configuration object를 찾는다.
+webpack.config.js file doesn't work with server code 
+webpack.config.js file is fully 100% client code
+따라서, "babel-node"를 쓸 수가 없다.
+"dev:server": "nodemon --exec babel-node init.js --delay 2",
+THEREFORE, you need to work old JavaScript on webpack.config.js
+ex)
+ export / import 대신, modlue.exports = config; 방식으로 코드를 짠다.
+
+WEBPACK has TWO things (entry, output)
+
+ entry: where your file comes from.
+ output: where do you want to put it? (output should be an Object)
+
+ *Create a folder called "assets", and then two folders inside "assets" (js, scss)
+ 
+ *NODE.JS에는 파일과 디렉토리(경로)를 absolute로 만들어주는 방법이 있다.
+ (컴퓨터나, 서버에서의 전체 경로를 나타낸다.)  
+  노드 패키지인 'path'를 사용해서 할 수 있다. 
+  const path = require('path'); => webpack can't read the modern JavaScript
+
+ ex) /users/frankkim/documents/youtubeProject/assets
+
+ TO get the path => const ENTRY_FILE = path.resolve(__dirname, "input/your/path" ) 
+* __dirname은 현재의 프로젝트 디렉토리 이름이다. 어디서나 접근 가능한 NODE JS 글로벌 변수.
+
+const OUTPUT_DIR = path.join("__dirname", "static") 
+OUTPUT_DIR는 file이 아닌, directory다. => "static"이라는 폴더로 export 
+
+
+path.resolve returns a full path from the root of your computer to the file.
+path.resolve creates the absolute path.
+
+path.join joins two paths together.
+
+
+
+
+***
+webpack-cli는 터미널에서 webpack을 쓸 수 있게 해준다.
+
+*webpack MODE를 설정해준다.
+package.json => "scripts" => 
+    
+    "dev:assets": "WEBPACK_ENV=development webpack"
+
+*"build:assets"를 추가한다. > 코드를 SERVER에 올려준다.
+
+    "build:assets": "WEBPACK_ENV=production webpack"
+
+*webpack.config.js  에서 package.json에서 생성한 .env파일을(ENV) 불러온다.
+const MODE = process.env.WEBPACK_ENV;
+process.env."WEBPACK_ENV" === package.json("WEBPACK_ENV") 이름이랑 똑같아야 한다.
+
+
+WEBPACK은 css파일을 읽지 못해서 설정을 해줘야 한다.
+WEBPACK doesn't know anything so we need to add loader. 
+we are going to give webpack  "rules"(array)
+whenever webpack finds module, we should give webpack rules(array).
+
+webpack은 config 파일에서, 아래에서 위로 실행한다.
+
+        module: {
+            rules: [
+            {
+                test: /\.(scss)$/,
+                use: ExtractCSS.extract([ // EXTRACT CSS TEXTS
+                {
+                    loader: "css-loader" // getting the pure CSS
+                },
+                {
+                    loader: "postcss-loader" // make CSS FILES compatible with browsers
+                },
+                {
+                    loader: "sass-loader" // sass => normal CSS
+                }
+                ])
+            }
+            ]
+        },
+
+    1. regular expression("/\(.scss|sass)$/") will find all the scss, sass files
+   
+    2. and then it will change them to css files
+
+        npm install --save-dev extract-text-webpack-plugin
+        or npm install extract-text-webpack-plugin@next  for beta version
+
+        *const ExtractCSS = require("extract-text-webpack-plugin"); in webpack.config.js
+   
+    3. extract pure text   
+    4. and then make a file only with css files 
+
+    PostCSS는 많은 기능들이 있다. ex) Autoprefixer
+    npm install node-sass
+    npm install autoprefixer
+
+ dotenv does not create process.env, dotenv is to load the contents of the .env file to the process.env
+
+ There are lots of variables on process.env, dotenv is just a way of adding them.
 
 # \*
 
