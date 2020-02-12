@@ -20,6 +20,7 @@ app.use(helmet()); // security
 app.set("view engine", "pug");
 
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 // when somebody goes to /uploads, it goes to uploads directory.
 app.use(cookieParser());
 app.use(bodyParser.json());

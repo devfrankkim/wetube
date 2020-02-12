@@ -333,7 +333,7 @@ webpack은 config 파일에서, 아래에서 위로 실행한다.
             rules: [
             {
                 test: /\.(scss)$/,
-                use: ExtractCSS.extract([ // EXTRACT CSS TEXTS
+                use: ExtractCSS.extract([ // EXTRACT CSS TEXTS =>
                 {
                     loader: "css-loader" // getting the pure CSS
                 },
@@ -367,6 +367,31 @@ webpack은 config 파일에서, 아래에서 위로 실행한다.
  dotenv does not create process.env, dotenv is to load the contents of the .env file to the process.env
 
  There are lots of variables on process.env, dotenv is just a way of adding them.
+
+When do you usually use process.env? 
+=> When you want to know if you're developing or on production.
+
+***npm install babel-loader***
+what does babel-loader do?
+
+dev:assets "-w"=> (webpack 실행시 => static 폴더로 이동(app.js서버에 설정)
+Watch the files because CSS 파일 수정할 때마다, webpack 자동 실행.
+That means it is going to watch CSS and run if any updates
+
+
+    "dev:assets": "WEBPACK_ENV=development webpack -w",
+
+webpack.config 설정이 바뀌면, 다시 dev:assets 이용하여 재실행 시켜야한다.
+
+
+
+babel-loader is the Webpack loader responsible for taking in the ES6 code and making it understandable by the browser of choice
+
+***babel polyfill***
+npm install @babel/polyfill
+
+gitignore(static)
+
 
 # \*
 
